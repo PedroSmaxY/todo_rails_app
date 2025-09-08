@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   resources :todos
 
-  get "/projects" => "projects#index"
-  get "/projects/:id" => "projects#show", as: :project
+  get    "/projects"          => "projects#index"
+  get    "/projects/new"      => "projects#new",  as: :new_project
+  get    "/projects/:id"      => "projects#show", as: :project
+  get    "/projects/:id/edit" => "projects#edit", as: :edit_project
+  post   "/projects"          => "projects#create"
+  patch  "/projects/:id"      => "projects#update"
+  delete "/projects/:id"      => "projects#destroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
