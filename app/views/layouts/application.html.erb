@@ -26,6 +26,8 @@
     <% if flash[:notice] %>
       <p class="flash"><%= flash[:notice] %></p>
     <% end %>
-    <%= yield %>
+    <div class="flex flex-col">
+      <%= yield %>
+    </div>
   </body>
 </html>

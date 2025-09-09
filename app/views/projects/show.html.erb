@@ -1,12 +1,34 @@
-<h1><%= @project.name %></h1>
-
-<ul>
-    <% @project.todos.each do |todo| %>
-    <li>
-        <%= link_to todo.name, todo_path(todo)%>
-        <%if todo.completed %>✅<% end %>
-    </li>
+<div class="flex flex-col justify-center items-center min-h-screen bg-gray-50">
+  <h1 class="text-4xl font-bold mb-6">
+    Project: <strong class="text-green-700"><%= @project.name %></strong>
+  </h1>
+  
+  <div class="bg-white rounded-lg shadow-md p-8 w-full max-w-xl mb-10">
+    <h2 class="text-center text-green-600 font-bold text-2xl mb-4">Available Todos:</h2>
+    <% if @project.todos.any? %>
+      <ul class="space-y-3">
+        <% @project.todos.each do |todo| %>
+          <li class="flex items-center justify-between bg-gray-100 rounded px-4 py-2">
+            <span>
+              <%= link_to todo.name, todo_path(todo), class: "text-blue-600 hover:underline font-medium" %>
+            </span>
+            <% if todo.completed %>
+              <span class="ml-2 text-green-500 text-xl">✅</span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-500 text-center">No todos created yet...</p>
     <% end %>
-</ul>
+    <div class="mt-6 text-center">
+      <%= link_to "New Todo", new_todo_path(project_id: @project.id), class: "bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow" %>
+    </div>
+  </div>
 
-<%= button_to "Delete Project", project_path(@project), method: :delete %>
+  <div class="flex gap-6">
+    <%= button_to "Edit Project", edit_project_path(@project), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow" %>
+    <%= button_to "Back to Projects", projects_path, method: :get, class: "bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded shadow" %>
+    <%= button_to "Delete Project", project_path(@project), method: :delete, data: { confirm: "Are you sure?" }, class: "bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded shadow" %>
+  </div>
+</div>

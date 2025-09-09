@@ -1,10 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <p class="text-green-700 font-semibold mb-4 text-center"><%= notice %></p>
+<% end %>
 
-<%= render @todo %>
+<div class="max-w-xl mx-auto">
+  <%= render @todo %>
 
-<div>
-  <%= link_to "Edit this todo", edit_todo_path(@todo) %> |
-  <%= link_to "Back to todos", todos_path %>
-
-  <%= button_to "Destroy this todo", @todo, method: :delete %>
+  <div class="mt-8 flex gap-4 justify-center">
+    <%= link_to "Edit this todo", edit_todo_path(@todo), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow" %>
+    <%= link_to "Back to todos", todos_path, class: "bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded shadow" %>
+    <%= button_to "Destroy this todo", @todo, method: :delete, data: { confirm: "Are you sure?" }, class: "bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded shadow" %>
+  </div>
 </div>

@@ -1,42 +1,43 @@
-<%= form_with(model: todo) do |form| %>
+<%= form_with(model: todo, class: "space-y-6") do |form| %>
   <% if todo.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
-
-      <ul>
-        <% todo.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      <h2 class="font-bold mb-2">
+        <%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:
+      </h2>
+      <ul class="list-disc pl-5">
+        <% todo.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="flex flex-col gap-2">
+    <%= form.label :name, class: "font-semibold text-gray-700" %>
+    <%= form.text_field :name, class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.textarea :description %>
+  <div class="flex flex-col gap-2">
+    <%= form.label :description, class: "font-semibold text-gray-700" %>
+    <%= form.text_area :description, class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" %>
   </div>
   
-  <div>
-    <%= form.label :completed, style: "display: block" %>
-    <%= form.check_box :completed %>
+  <div class="flex items-center gap-2">
+    <%= form.label :completed, class: "font-semibold text-gray-700" %>
+    <%= form.check_box :completed, class: "h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-400" %>
   </div>
   
-  <div>
-    <%= form.label :priority, style: "display: block" %>
-    <%= form.number_field :priority %>
+  <div class="flex flex-col gap-2">
+    <%= form.label :priority, class: "font-semibold text-gray-700" %>
+    <%= form.number_field :priority, class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" %>
   </div>
 
-  <div>
-    <%= form.label :project_id, style: "display: block" %>
-    <%= form.collection_select :project_id, Project.all, :id, :name, prompt: "Select a project" %>
+  <div class="flex flex-col gap-2">
+    <%= form.label :project_id, class: "font-semibold text-gray-700" %>
+    <%= form.collection_select :project_id, Project.all, :id, :name, { prompt: "Select a project" }, class: "border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400" %>
   </div>
   
   <div>
-    <%= form.submit %>
+    <%= form.submit "Save Todo", class: "bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded shadow" %>
   </div>
 <% end %>
